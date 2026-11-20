@@ -16,32 +16,31 @@
 
   <style>
     /* ==========================================================================
-       CSS VARIABLES: PALET MINION ELEGAN (SOFT PASTEL YELLOW & CYBER DENIM)
+       CSS VARIABLES: PALET WARNA KUNING SOFT ELEGAN (TIDAK SAKIT MATA)
        ========================================================================== */
     :root {
-      /* Soft Yellows - Warna mentega pastel lembut, tidak menusuk mata */
-      --yellow-soft: #FDE68A;        /* Warm pastel yellow */
-      --yellow-butter: #FEF08A;      /* Light butter yellow */
-      --yellow-accent: #FACC15;      /* Accent yellow */
-      --yellow-glow: rgba(250, 204, 21, 0.32);
+      /* Soft Yellow Palette */
+      --yellow-cream: #FFFDF0;      /* Ultra soft butter cream */
+      --yellow-pastel-1: #FEF9C3;   /* Soft warm pastel */
+      --yellow-pastel-2: #FEF08A;   /* Butter yellow pastel */
+      --yellow-soft: #FDE68A;       /* Warm yellow soft */
+      --yellow-accent: #FACC15;     /* Accent yellow */
+      --yellow-glow: rgba(250, 204, 21, 0.35);
       --gold-luxury: #EAB308;
+      --amber-warm: #F59E0B;
 
-      /* Cyber Denim / Space Navy Lab */
-      --bg-dark: #080C15;
-      --bg-card: rgba(15, 23, 42, 0.85);
-      --bg-card-hover: rgba(30, 41, 59, 0.95);
-      --border-color: rgba(253, 230, 138, 0.2);
-      --border-glow: rgba(253, 230, 138, 0.5);
+      /* Card Backgrounds: Deep contrast Navy Glass to maintain pristine readability on soft yellow backdrop */
+      --bg-card: rgba(15, 23, 42, 0.88);
+      --bg-card-hover: rgba(24, 34, 54, 0.95);
+      --border-color: rgba(253, 230, 138, 0.28);
+      --border-glow: rgba(245, 158, 11, 0.45);
 
-      /* High-Tech & Mining Accents */
+      /* Accents */
       --denim-blue: #2563EB;
-      --denim-dark: #1E3A8A;
       --cyan-tech: #38BDF8;
       --emerald-tech: #34D399;
-      --amber-mining: #F59E0B;
-      --purple-quantum: #A855F7;
-      --danger-red: #EF4444;
       --text-main: #F8FAFC;
+      --text-dark: #0F172A;
       --text-muted: #94A3B8;
 
       --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -57,28 +56,119 @@
     }
 
     body {
-      background-color: var(--bg-dark);
+      background-color: var(--yellow-cream);
       color: var(--text-main);
       font-family: var(--font-body);
       line-height: 1.6;
       overflow-x: hidden;
       position: relative;
-      background-image: 
-        radial-gradient(circle at 10% 15%, rgba(250, 204, 21, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 90% 65%, rgba(56, 189, 248, 0.06) 0%, transparent 45%),
-        radial-gradient(circle at 50% 85%, rgba(245, 158, 11, 0.05) 0%, transparent 50%),
-        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+      min-height: 100vh;
+    }
+
+    /* ==========================================================================
+       DYNAMIC GRADIENT BACKGROUND (KUNING SOFT BERGRADASI SAAT DI-SCROLL)
+       ========================================================================== */
+    #scroll-gradient-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background: linear-gradient(180deg, #FFFDF0 0%, #FEF9C3 20%, #FEF08A 45%, #FDE68A 70%, #FCD34D 90%, #F59E0B 100%);
+      pointer-events: none;
+      transition: filter 0.2s ease;
+    }
+
+    /* Subtle Twinkle Canvas (Efek Kelap-Kelip Halus) */
+    #twinkle-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       FLYING MINIONS IN BACKGROUND (MINION BERTERBANGAN DI LATAR BELAKANG)
+       ========================================================================== */
+    .bg-floating-minions-container {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .flying-minion {
+      position: absolute;
+      user-select: none;
+      opacity: 0.65;
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.12));
+    }
+
+    /* Minion 1: Floating with Yellow & Blue Balloons */
+    .minion-balloon-1 {
+      width: 75px;
+      height: 110px;
+      left: 6%;
+      top: 15%;
+      animation: floatBalloon 9s ease-in-out infinite alternate;
+    }
+
+    /* Minion 2: Jetpack gliding across diagonally */
+    .minion-jetpack-bg {
+      width: 65px;
+      height: 70px;
+      right: 8%;
+      top: 30%;
+      animation: floatJetpack 14s linear infinite;
+    }
+
+    /* Minion 3: Parachute descending softly */
+    .minion-parachute {
+      width: 70px;
+      height: 95px;
+      left: 82%;
+      top: 60%;
+      animation: floatParachute 11s ease-in-out infinite alternate;
+    }
+
+    /* Minion 4: Propeller hat hovering gently */
+    .minion-propeller {
+      width: 60px;
+      height: 75px;
+      left: 12%;
+      top: 72%;
+      animation: floatPropeller 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBalloon {
+      0% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-40px) rotate(4deg) scale(1.03); }
+      100% { transform: translateY(-15px) rotate(-2deg); }
+    }
+
+    @keyframes floatJetpack {
+      0% { transform: translate(120px, 0) scale(0.9); }
+      50% { transform: translate(-30px, -35px) scale(1.05); }
+      100% { transform: translate(120px, 0) scale(0.9); }
+    }
+
+    @keyframes floatParachute {
+      0% { transform: translateY(0) rotate(4deg); }
+      50% { transform: translateY(-50px) rotate(-5deg); }
+      100% { transform: translateY(10px) rotate(3deg); }
+    }
+
+    @keyframes floatPropeller {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-30px) scale(1.08) rotate(5deg); }
     }
 
     ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #080C15; }
-    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--yellow-soft); }
+    ::-webkit-scrollbar-track { background: #FEF08A; }
+    ::-webkit-scrollbar-thumb { background: #D97706; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #B45309; }
 
     /* ==========================================================================
-       CUSTOM MINION CYBER CURSOR (CLEAN, ELEGAN & TANPA PETIR)
+       CUSTOM MINION CYBER CURSOR (CLEAN & ELEGANT, TANPA PETIR)
        ========================================================================== */
     #minion-cursor {
       position: fixed;
@@ -90,11 +180,11 @@
       z-index: 9999999;
       transform: translate(-30%, -20%);
       transition: transform 0.05s ease-out, filter 0.2s ease;
-      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
     }
 
     #minion-cursor.cursor-hover {
-      transform: translate(-30%, -20%) scale(1.35) rotate(-10deg);
+      transform: translate(-30%, -20%) scale(1.3) rotate(-10deg);
       filter: drop-shadow(0 0 16px var(--yellow-accent));
     }
 
@@ -102,11 +192,11 @@
       transform: translate(-30%, -20%) scale(0.88) rotate(6deg);
     }
 
-    /* Efek Ripple Klik Elegan & Lembut (Pengganti Petir) */
+    /* Soft Cyber Click Ripple */
     .cyber-click-ripple {
       position: fixed;
       border-radius: 50%;
-      border: 2px solid var(--yellow-soft);
+      border: 2px solid var(--amber-warm);
       box-shadow: 0 0 12px var(--yellow-accent);
       pointer-events: none;
       z-index: 9999996;
@@ -119,7 +209,6 @@
       100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
     }
 
-    /* Partikel kursor saat bergerak */
     .cursor-particle {
       position: fixed;
       pointer-events: none;
@@ -129,12 +218,12 @@
     }
 
     /* ==========================================================================
-       4 DISTINCT ARCADE GAMES INTRO (4 GAMES x 30 DETIK = 120s / 2 MENIT)
+       6 ARCADE GAMES INTRO (6 GAMES x 20 DETIK = 120s / 2 MENIT)
        ========================================================================== */
     #intro-screen {
       position: fixed;
       inset: 0;
-      background: #050811;
+      background: radial-gradient(circle at center, #1E293B 0%, #080C15 100%);
       z-index: 999999;
       display: flex;
       flex-direction: column;
@@ -150,27 +239,21 @@
       pointer-events: none;
     }
 
-    .intro-grid {
+    .intro-grid-pattern {
       position: absolute;
       inset: 0;
       background-image: 
-        linear-gradient(rgba(253, 230, 138, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(253, 230, 138, 0.04) 1px, transparent 1px);
+        linear-gradient(rgba(253, 230, 138, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(253, 230, 138, 0.05) 1px, transparent 1px);
       background-size: 35px 35px;
       pointer-events: none;
-      animation: gridDrift 25s infinite linear;
-    }
-
-    @keyframes gridDrift {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(35px); }
     }
 
     /* GATE START SCREEN */
     #intro-gate-screen {
       position: absolute;
       inset: 0;
-      background: rgba(5, 8, 17, 0.96);
+      background: rgba(8, 12, 21, 0.96);
       z-index: 50;
       display: flex;
       flex-direction: column;
@@ -201,29 +284,29 @@
       50% { transform: scale(1.05); box-shadow: 0 16px 45px rgba(250, 204, 21, 0.75); }
     }
 
-    /* MAIN 4-GAME ARCADE CONTAINER */
+    /* MAIN ARCADE BOX */
     .intro-main-container {
       position: relative;
       z-index: 15;
       width: 94%;
       max-width: 860px;
-      background: rgba(13, 19, 33, 0.94);
+      background: rgba(15, 23, 42, 0.94);
       border: 1px solid var(--border-glow);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 45px rgba(250, 204, 21, 0.2);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 45px rgba(250, 204, 21, 0.25);
       border-radius: 28px;
-      padding: 26px;
+      padding: 24px;
       text-align: center;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
     }
 
-    /* Top HUD: Game Selector, Score, Per-Game Timer & Skip Buttons */
+    /* Top HUD */
     .arcade-hud-topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
-      padding-bottom: 12px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       font-family: var(--font-mono);
       font-size: 0.82rem;
@@ -276,7 +359,7 @@
     }
 
     .btn-skip-single-game {
-      background: linear-gradient(135deg, rgba(250, 204, 21, 0.2), rgba(245, 158, 11, 0.3));
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.25), rgba(245, 158, 11, 0.35));
       border: 1px solid var(--yellow-soft);
       color: var(--yellow-soft);
       padding: 6px 14px;
@@ -317,187 +400,37 @@
       border-radius: 20px;
       position: relative;
       overflow: hidden;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       box-shadow: inset 0 0 30px rgba(0,0,0,0.7);
     }
 
-    /* -------------------------------------------------------------
-       GAME 1: MINION JETPACK FLYER (CANVAS RUNNER)
-       ------------------------------------------------------------- */
-    #game-1-container {
-      position: absolute;
-      inset: 0;
-      display: none;
-    }
-    #game-1-container.active { display: block; }
-
-    #jetpack-canvas {
+    .game-canvas-screen {
       width: 100%;
       height: 100%;
       display: block;
     }
 
-    .jetpack-instruction {
+    .game-layer {
+      position: absolute;
+      inset: 0;
+      display: none;
+    }
+    .game-layer.active { display: block; }
+
+    .game-instruction-pill {
       position: absolute;
       bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(0,0,0,0.65);
-      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.7);
+      border: 1px solid rgba(255,255,255,0.18);
       color: var(--yellow-soft);
       padding: 4px 14px;
       border-radius: 99px;
       font-family: var(--font-mono);
       font-size: 0.75rem;
       pointer-events: none;
-    }
-
-    /* -------------------------------------------------------------
-       GAME 2: MINING DIGGER (GRID EXCAVATION)
-       ------------------------------------------------------------- */
-    #game-2-container {
-      position: absolute;
-      inset: 0;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-    }
-    #game-2-container.active { display: flex; }
-
-    .mining-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 54px);
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .mine-block {
-      width: 54px;
-      height: 54px;
-      border-radius: 10px;
-      background: #1E293B;
-      border: 2px solid #334155;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      color: #94A3B8;
-      transition: transform 0.1s, background 0.2s, border-color 0.2s;
-      user-select: none;
-    }
-
-    .mine-block:hover {
-      transform: scale(1.08);
-      border-color: var(--yellow-soft);
-    }
-
-    .mine-block.revealed {
-      background: #0F172A;
-      border-color: var(--emerald-tech);
-      animation: popReveal 0.25s ease-out;
-    }
-
-    @keyframes popReveal {
-      0% { transform: scale(0.5); }
-      70% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-
-    /* -------------------------------------------------------------
-       GAME 3: QUANTUM MATRIX (SIMON SAYS MEMORY HACK)
-       ------------------------------------------------------------- */
-    #game-3-container {
-      position: absolute;
-      inset: 0;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-    }
-    #game-3-container.active { display: flex; }
-
-    .matrix-nodes-circle {
-      display: grid;
-      grid-template-columns: repeat(2, 90px);
-      gap: 16px;
-      margin-top: 10px;
-    }
-
-    .matrix-node-btn {
-      width: 90px;
-      height: 90px;
-      border-radius: 18px;
-      border: 3px solid transparent;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      transition: all 0.15s ease;
-      background: #111827;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    }
-
-    .node-yellow { color: #FDE68A; border-color: rgba(253, 230, 138, 0.4); }
-    .node-cyan { color: #38BDF8; border-color: rgba(56, 189, 248, 0.4); }
-    .node-green { color: #34D399; border-color: rgba(52, 211, 153, 0.4); }
-    .node-purple { color: #C084FC; border-color: rgba(192, 132, 252, 0.4); }
-
-    .matrix-node-btn.flashing {
-      transform: scale(1.12);
-      filter: brightness(1.7);
-      box-shadow: 0 0 25px currentColor;
-    }
-
-    /* -------------------------------------------------------------
-       GAME 4: WHACK-A-MINION (INTERACTIVE TARGET FRENZY)
-       ------------------------------------------------------------- */
-    #game-4-container {
-      position: absolute;
-      inset: 0;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-    }
-    #game-4-container.active { display: flex; }
-
-    .whack-holes-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 110px);
-      gap: 16px;
-      margin-top: 8px;
-    }
-
-    .whack-hole {
-      width: 110px;
-      height: 80px;
-      border-radius: 50%;
-      background: #090D16;
-      border: 3px solid #1E293B;
-      box-shadow: inset 0 8px 15px rgba(0,0,0,0.8);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .whack-mole-target {
-      position: absolute;
-      bottom: -90px;
-      width: 70px;
-      height: 75px;
-      transition: bottom 0.18s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-      user-select: none;
-    }
-
-    .whack-mole-target.up {
-      bottom: 2px;
+      z-index: 20;
     }
 
     /* Floating point notification */
@@ -519,7 +452,7 @@
 
     /* Stage description & titles */
     .stage-title {
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: 800;
       color: #FFF;
       margin-bottom: 2px;
@@ -530,12 +463,11 @@
     }
     .stage-desc {
       font-family: var(--font-mono);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
       min-height: 20px;
     }
 
-    /* 30s Game progress bar */
     .per-game-progress-wrapper {
       width: 100%;
       height: 6px;
@@ -565,8 +497,8 @@
       padding: 14px 5%;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      background: rgba(8, 12, 21, 0.88);
-      border-bottom: 1px solid var(--border-color);
+      background: rgba(15, 23, 42, 0.85);
+      border-bottom: 1px solid rgba(253, 230, 138, 0.2);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -622,9 +554,9 @@
 
     nav a {
       text-decoration: none;
-      color: var(--text-muted);
+      color: #E2E8F0;
       font-size: 0.88rem;
-      font-weight: 500;
+      font-weight: 600;
       transition: color 0.2s;
       position: relative;
     }
@@ -647,7 +579,7 @@
     }
 
     .sound-toggle-btn {
-      background: rgba(253, 230, 138, 0.1);
+      background: rgba(253, 230, 138, 0.15);
       border: 1px solid var(--border-glow);
       color: var(--yellow-soft);
       padding: 6px 14px;
@@ -659,7 +591,7 @@
       gap: 8px;
       transition: all 0.2s;
     }
-    .sound-toggle-btn:hover { background: rgba(253, 230, 138, 0.2); }
+    .sound-toggle-btn:hover { background: rgba(253, 230, 138, 0.25); }
 
     .btn-contact {
       background: linear-gradient(135deg, var(--yellow-soft), #FACC15);
@@ -702,8 +634,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.4);
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(16, 185, 129, 0.5);
       padding: 6px 14px;
       border-radius: 99px;
       font-size: 0.78rem;
@@ -733,10 +665,12 @@
       line-height: 1.15;
       letter-spacing: -1px;
       margin-bottom: 14px;
+      color: #0F172A; /* Crisp deep dark on soft yellow */
+      text-shadow: 0 2px 10px rgba(253, 230, 138, 0.5);
     }
 
     .hero-title .name-highlight {
-      background: linear-gradient(135deg, #FFF 15%, var(--yellow-soft) 70%, #F59E0B 100%);
+      background: linear-gradient(135deg, #0F172A 20%, #B45309 80%, #D97706 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
@@ -751,33 +685,34 @@
     }
 
     .cred-badge {
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(15, 23, 42, 0.88);
       border: 1px solid var(--border-color);
-      padding: 4px 10px;
-      border-radius: 6px;
+      padding: 5px 12px;
+      border-radius: 8px;
       font-family: var(--font-mono);
       font-size: 0.75rem;
       color: var(--yellow-soft);
       display: flex;
       align-items: center;
       gap: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .cred-badge.financial-badge {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: rgba(16, 185, 129, 0.45);
-      color: var(--emerald-tech);
-      font-weight: 700;
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(16, 185, 129, 0.5);
+      color: #065F46;
+      font-weight: 800;
     }
 
     .hero-desc {
       font-size: 1.05rem;
-      color: var(--text-muted);
+      color: #334155;
       max-width: 600px;
       margin-bottom: 26px;
       line-height: 1.7;
     }
-    .hero-desc strong { color: #E2E8F0; }
+    .hero-desc strong { color: #0F172A; }
 
     .hero-actions {
       display: flex;
@@ -788,8 +723,9 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--yellow-soft), #FACC15);
-      color: #080C15;
+      background: linear-gradient(135deg, #0F172A, #1E293B);
+      color: var(--yellow-soft);
+      border: 1px solid var(--yellow-soft);
       padding: 13px 26px;
       border-radius: 10px;
       font-weight: 700;
@@ -798,21 +734,22 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 8px 24px var(--yellow-glow);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.25);
       transition: all 0.25s ease;
     }
     .btn-primary:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(250, 204, 21, 0.45);
+      background: #080C15;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.4);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-color);
-      color: #F8FAFC;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid #CBD5E1;
+      color: #0F172A;
       padding: 13px 24px;
       border-radius: 10px;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.95rem;
       text-decoration: none;
       display: inline-flex;
@@ -820,22 +757,22 @@
       gap: 10px;
       transition: all 0.25s ease;
       font-family: var(--font-mono);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
     .btn-secondary:hover {
-      background: rgba(253, 230, 138, 0.1);
-      border-color: var(--yellow-soft);
-      color: var(--yellow-soft);
+      background: #FFFFFF;
+      border-color: var(--amber-warm);
       transform: translateY(-2px);
     }
 
-    /* Key Metrics: UNLIMITED & FINANCIAL FREEDOM */
+    /* Key Metrics */
     .hero-metrics {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
       max-width: 580px;
       padding-top: 22px;
-      border-top: 1px solid var(--border-color);
+      border-top: 1px solid rgba(15, 23, 42, 0.15);
     }
 
     .metric-item { display: flex; flex-direction: column; }
@@ -843,17 +780,18 @@
       font-family: var(--font-mono);
       font-size: 1.55rem;
       font-weight: 800;
-      color: var(--yellow-soft);
+      color: #0F172A;
       display: flex;
       align-items: baseline;
       gap: 4px;
     }
     .metric-label {
       font-size: 0.74rem;
-      color: var(--text-muted);
+      color: #475569;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-top: 2px;
+      font-weight: 600;
     }
 
     /* Hero Profile Photo & Holographic Card */
@@ -873,7 +811,7 @@
     .holo-glow-bg {
       position: absolute;
       inset: -15px;
-      background: radial-gradient(circle, rgba(253, 230, 138, 0.3) 0%, rgba(245, 158, 11, 0.2) 40%, rgba(56, 189, 248, 0.15) 70%, transparent 80%);
+      background: radial-gradient(circle, rgba(250, 204, 21, 0.4) 0%, rgba(245, 158, 11, 0.25) 40%, rgba(56, 189, 248, 0.2) 70%, transparent 80%);
       filter: blur(28px);
       z-index: 1;
       animation: pulseGlow 4s infinite alternate;
@@ -887,11 +825,11 @@
     .profile-card {
       position: relative;
       z-index: 2;
-      background: linear-gradient(160deg, rgba(24, 34, 54, 0.9) 0%, rgba(11, 16, 28, 0.98) 100%);
+      background: linear-gradient(160deg, rgba(24, 34, 54, 0.95) 0%, rgba(11, 16, 28, 0.98) 100%);
       border: 1px solid var(--border-glow);
       border-radius: 26px;
       padding: 16px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
       overflow: hidden;
     }
 
@@ -902,8 +840,8 @@
       font-family: var(--font-mono);
       font-size: 0.68rem;
       color: var(--emerald-tech);
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.35);
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
       padding: 3px 8px;
       border-radius: 6px;
       z-index: 5;
@@ -974,7 +912,7 @@
 
     .float-badge {
       position: absolute;
-      background: rgba(13, 20, 36, 0.92);
+      background: rgba(15, 23, 42, 0.95);
       border: 1px solid var(--border-glow);
       backdrop-filter: blur(12px);
       padding: 10px 14px;
@@ -983,7 +921,7 @@
       align-items: center;
       gap: 10px;
       z-index: 5;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
       font-family: var(--font-mono);
       font-size: 0.78rem;
     }
@@ -997,7 +935,7 @@
 
     /* ==========================================================================
        SECTION COMMONS
-       ========================================================================= */
+       ========================================================================== */
     section { padding: 90px 5%; position: relative; }
     .section-header { text-align: center; max-width: 720px; margin: 0 auto 55px; }
 
@@ -1007,19 +945,26 @@
       gap: 6px;
       font-family: var(--font-mono);
       font-size: 0.8rem;
-      color: var(--yellow-soft);
-      background: rgba(253, 230, 138, 0.08);
-      border: 1px solid var(--border-color);
+      color: #0F172A;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(15, 23, 42, 0.2);
       padding: 5px 14px;
       border-radius: 99px;
       margin-bottom: 12px;
       text-transform: uppercase;
       letter-spacing: 1px;
+      font-weight: 700;
     }
 
-    .section-title { font-size: 2.3rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 12px; }
-    .section-title span { color: var(--yellow-soft); }
-    .section-desc { color: var(--text-muted); font-size: 0.95rem; }
+    .section-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      color: #0F172A;
+    }
+    .section-title span { color: #B45309; }
+    .section-desc { color: #475569; font-size: 0.95rem; }
 
     /* ==========================================================================
        VENTURES & MINING CONGLOMERATE
@@ -1038,17 +983,18 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
     .venture-card:hover {
       transform: translateY(-6px);
-      border-color: var(--border-glow);
+      border-color: var(--yellow-accent);
       background: var(--bg-card-hover);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
     }
 
     .venture-card.mining-highlight {
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      background: linear-gradient(160deg, rgba(28, 32, 45, 0.85) 0%, rgba(17, 24, 39, 0.95) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.6);
+      background: linear-gradient(160deg, rgba(28, 32, 45, 0.92) 0%, rgba(17, 24, 39, 0.98) 100%);
     }
     .venture-card.mining-highlight::before {
       content: '';
@@ -1126,7 +1072,7 @@
       background: #0D131F;
       border: 1px solid var(--border-glow);
       border-radius: 18px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
       overflow: hidden;
       font-family: var(--font-mono);
     }
@@ -1179,6 +1125,7 @@
       border-radius: 22px;
       padding: 34px;
       position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
     .lore-card::before {
       content: '';
@@ -1203,7 +1150,7 @@
     }
 
     .skill-card {
-      background: rgba(15, 23, 42, 0.65);
+      background: rgba(15, 23, 42, 0.88);
       border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 20px;
@@ -1211,14 +1158,15 @@
       flex-direction: column;
       gap: 12px;
       transition: all 0.25s;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     }
     .skill-card:hover {
       border-color: var(--yellow-soft);
-      background: rgba(253, 230, 138, 0.05);
+      background: rgba(24, 34, 54, 0.95);
     }
 
     .skill-info { display: flex; justify-content: space-between; align-items: center; }
-    .skill-title { font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+    .skill-title { font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; color: #FFF; }
     .skill-percent { font-family: var(--font-mono); font-size: 0.85rem; color: var(--yellow-soft); }
 
     .skill-bar { width: 100%; height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 99px; overflow: hidden; }
@@ -1234,7 +1182,7 @@
       padding: 48px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
 
     .income-grid {
@@ -1289,7 +1237,7 @@
       border-color: var(--border-glow);
       transform: translateX(4px);
     }
-    .stream-name { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 600; }
+    .stream-name { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 600; color: #FFF; }
     .stream-amount { font-family: var(--font-mono); font-size: 0.85rem; color: var(--emerald-tech); font-weight: 700; }
 
     /* ==========================================================================
@@ -1303,6 +1251,7 @@
       border-radius: 24px;
       padding: 40px;
       position: relative;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
     }
 
     .contact-form-grid {
@@ -1417,14 +1366,16 @@
     /* Footer */
     footer {
       padding: 40px 5%;
-      border-top: 1px solid var(--border-color);
+      border-top: 1px solid rgba(15, 23, 42, 0.15);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: var(--text-muted);
+      color: #334155;
       font-size: 0.85rem;
+      background: rgba(254, 240, 138, 0.4);
+      backdrop-filter: blur(8px);
     }
-    footer a { color: var(--yellow-soft); text-decoration: none; }
+    footer a { color: #0F172A; text-decoration: none; font-weight: 700; }
 
     @media (max-width: 992px) {
       .hero-section { grid-template-columns: 1fr; padding-top: 110px; text-align: center; }
@@ -1442,25 +1393,95 @@
 </head>
 <body>
 
-  <!-- ========================================================================
-       CUSTOM MINION CYBER CURSOR (CLEAN, NO LIGHTNING)
-       ======================================================================== -->
+  <!-- Dynamic Scroll-linked Yellow Gradient Background -->
+  <div id="scroll-gradient-bg"></div>
+
+  <!-- Twinkling Sparkles Canvas (Kelap-Kelip Halus) -->
+  <canvas id="twinkle-canvas"></canvas>
+
+  <!-- Flying Background Minions (Minion Berterbangan di Latar Belakang) -->
+  <div class="bg-floating-minions-container">
+    <!-- Minion 1: Floating with Balloons -->
+    <div class="flying-minion minion-balloon-1">
+      <svg viewBox="0 0 100 140" width="100%" height="100%">
+        <!-- Balloons -->
+        <circle cx="35" cy="25" r="18" fill="#FACC15" />
+        <circle cx="65" cy="20" r="16" fill="#38BDF8" />
+        <line x1="35" y1="43" x2="50" y2="70" stroke="#334155" stroke-width="1.5" />
+        <line x1="65" y1="36" x2="50" y2="70" stroke="#334155" stroke-width="1.5" />
+        <!-- Minion Body -->
+        <rect x="30" y="70" width="40" height="55" rx="20" fill="#FDE68A" />
+        <rect x="30" y="105" width="40" height="20" fill="#2563EB" rx="4" />
+        <circle cx="50" cy="85" r="10" fill="#94A3B8" />
+        <circle cx="50" cy="85" r="7" fill="#FFFFFF" />
+        <circle cx="50" cy="85" r="3.5" fill="#38BDF8" />
+      </svg>
+    </div>
+
+    <!-- Minion 2: Jetpack Soaring -->
+    <div class="flying-minion minion-jetpack-bg">
+      <svg viewBox="0 0 100 90" width="100%" height="100%">
+        <!-- Rocket Flame -->
+        <polygon points="15,45 5,40 10,48 2,52 14,55" fill="#F59E0B" />
+        <!-- Jetpack Tank -->
+        <rect x="18" y="32" width="14" height="28" rx="4" fill="#64748B" />
+        <!-- Minion Body Horizontal -->
+        <rect x="32" y="30" width="55" height="32" rx="16" fill="#FDE68A" />
+        <rect x="32" y="30" width="22" height="32" rx="6" fill="#2563EB" />
+        <!-- Goggle -->
+        <circle cx="70" cy="46" r="9" fill="#94A3B8" />
+        <circle cx="70" cy="46" r="6" fill="#FFFFFF" />
+        <circle cx="70" cy="46" r="3" fill="#38BDF8" />
+      </svg>
+    </div>
+
+    <!-- Minion 3: Cute Parachute -->
+    <div class="flying-minion minion-parachute">
+      <svg viewBox="0 0 100 130" width="100%" height="100%">
+        <!-- Parachute Dome -->
+        <path d="M15 35 Q50 5 85 35 Z" fill="#FDE68A" stroke="#F59E0B" stroke-width="2" />
+        <line x1="15" y1="35" x2="50" y2="70" stroke="#64748B" stroke-width="1.2" />
+        <line x1="50" y1="20" x2="50" y2="70" stroke="#64748B" stroke-width="1.2" />
+        <line x1="85" y1="35" x2="50" y2="70" stroke="#64748B" stroke-width="1.2" />
+        <!-- Minion -->
+        <rect x="32" y="70" width="36" height="48" rx="18" fill="#FDE68A" />
+        <rect x="32" y="100" width="36" height="18" fill="#2563EB" rx="4" />
+        <circle cx="50" cy="84" r="9" fill="#94A3B8" />
+        <circle cx="50" cy="84" r="6" fill="#FFFFFF" />
+        <circle cx="50" cy="84" r="3" fill="#38BDF8" />
+      </svg>
+    </div>
+
+    <!-- Minion 4: Propeller Hat -->
+    <div class="flying-minion minion-propeller">
+      <svg viewBox="0 0 90 100" width="100%" height="100%">
+        <!-- Spinning Propeller Blades -->
+        <line x1="20" y1="18" x2="70" y2="18" stroke="#1E293B" stroke-width="3" />
+        <circle cx="45" cy="18" r="4" fill="#EF4444" />
+        <line x1="45" y1="18" x2="45" y2="28" stroke="#1E293B" stroke-width="2" />
+        <!-- Minion Body -->
+        <rect x="25" y="28" width="40" height="58" rx="20" fill="#FDE68A" />
+        <rect x="25" y="65" width="40" height="21" fill="#2563EB" rx="4" />
+        <circle cx="45" cy="44" r="10" fill="#94A3B8" />
+        <circle cx="45" cy="44" r="7" fill="#FFFFFF" />
+        <circle cx="45" cy="44" r="3.5" fill="#38BDF8" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Custom Minion Cursor -->
   <div id="minion-cursor">
     <svg viewBox="0 0 100 110" width="100%" height="100%">
       <ellipse cx="50" cy="104" rx="28" ry="5" fill="rgba(0,0,0,0.3)" />
       <path d="M38 95 L38 100 L30 100 C28 100 28 95 30 95 Z" fill="#1E293B" />
       <path d="M62 95 L62 100 L70 100 C72 100 72 95 70 95 Z" fill="#1E293B" />
-      <!-- Soft Butter Yellow Body -->
       <rect x="25" y="20" width="50" height="75" rx="25" fill="#FDE68A" />
-      <!-- Denim Overall -->
       <path d="M25 72 C25 72 32 80 50 80 C68 80 75 72 75 72 L75 92 C75 94 73 95 70 95 L30 95 C27 95 25 94 25 92 Z" fill="#2563EB" />
       <rect x="37" y="65" width="26" height="15" fill="#2563EB" />
       <path d="M25 68 L38 72 L36 76 L25 71 Z" fill="#1D4ED8" />
       <path d="M75 68 L62 72 L64 76 L75 71 Z" fill="#1D4ED8" />
-      <!-- Monogram P -->
       <circle cx="50" cy="74" r="5" fill="#1E293B" />
       <text x="48" y="77" font-size="7" font-weight="900" fill="#FDE68A" font-family="'JetBrains Mono'">P</text>
-      <!-- Silver Goggles -->
       <rect x="23" y="38" width="54" height="6" fill="#1E293B" />
       <circle cx="50" cy="41" r="14" fill="#94A3B8" stroke="#475569" stroke-width="2" />
       <circle cx="50" cy="41" r="10" fill="#FFFFFF" />
@@ -1473,10 +1494,10 @@
   </div>
 
   <!-- ========================================================================
-       4 DISTINCT ARCADE GAMES INTRO (4 GAMES x 30 DETIK = 120s)
+       6 ARCADE GAMES INTRO (20 DETIK PER GAME = 120s / 2 MENIT)
        ======================================================================== -->
   <div id="intro-screen">
-    <div class="intro-grid"></div>
+    <div class="intro-grid-pattern"></div>
 
     <!-- GATE SCREEN: KLIK UNTUK MEMULAI -->
     <div id="intro-gate-screen">
@@ -1492,7 +1513,7 @@
       </div>
 
       <div class="game-badge-indicator" style="margin-bottom: 12px;">
-        <i class="fa-solid fa-gamepad"></i> 4 ARCADE GAMES (30 DETIK PER GAME)
+        <i class="fa-solid fa-gamepad"></i> 6 ARCADE GAMES SERU (20 DETIK TIAP GAME)
       </div>
       
       <h1 style="font-size: 1.85rem; font-weight: 800; color: #FFF; margin-bottom: 8px; line-height: 1.3;">
@@ -1504,25 +1525,25 @@
         <i class="fa-solid fa-crown"></i> FINANCIAL FREEDOM SEJAK 2022 • UNLIMITED WEALTH
       </p>
 
-      <p style="color: var(--text-muted); font-size: 0.88rem; max-width: 540px; margin-bottom: 24px;">
-        4 Game Seru: Minion Jetpack, Mining Digger, Quantum Memory Matrix, & Whack-A-Minion!
+      <p style="color: var(--text-muted); font-size: 0.88rem; max-width: 580px; margin-bottom: 24px;">
+        Nikmati 6 game arcade seru: Minion Jetpack, Banana Ninja Slicer, Laser Bug Blaster, Basket Catch, Trampoline Juggler, & Cash Rain Vault!
       </p>
 
       <button class="gate-btn-start" id="btn-start-intro">
-        <i class="fa-solid fa-play"></i> MULAI 4 GAME SERU (30s TIAP GAME)
+        <i class="fa-solid fa-play"></i> MULAI 6 GAME SERU (20s TIAP GAME)
       </button>
 
-      <div style="margin-top: 14px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--cyan-tech);">
-        <i class="fa-solid fa-forward"></i> Dilengkapi Tombol "Skip Game Ini" Untuk Berpindah Game Kapan Saja
+      <div style="margin-top: 14px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--yellow-soft);">
+        <i class="fa-solid fa-forward"></i> Dilengkapi Tombol "Lewati Game Ini" Untuk Berganti Game Kapan Saja
       </div>
     </div>
 
-    <!-- MAIN 4-GAME ARCADE CONTAINER -->
+    <!-- MAIN 6-GAME ARCADE CONTAINER -->
     <div class="intro-main-container" id="intro-main-container" style="display: none;">
       <!-- TOP HUD -->
       <div class="arcade-hud-topbar">
         <div class="game-badge-indicator" id="current-game-badge">
-          <i class="fa-solid fa-gamepad"></i> GAME 1/4: MINION JETPACK
+          <i class="fa-solid fa-gamepad"></i> GAME 1/6: MINION JETPACK
         </div>
 
         <div class="score-badge">
@@ -1531,7 +1552,7 @@
 
         <div class="countdown-ring-box">
           <span style="color: var(--yellow-soft); font-size: 0.74rem;">GAME INI:</span>
-          <span class="countdown-digits" id="per-game-timer">30.0s</span>
+          <span class="countdown-digits" id="per-game-timer">20.0s</span>
         </div>
 
         <div class="action-skip-buttons">
@@ -1547,70 +1568,51 @@
       <!-- ARCADE ARENA VIEWPORT -->
       <div class="arcade-arena" id="arcade-arena">
         
-        <!-- ==========================================
-             GAME 1: MINION JETPACK FLYER (CANVAS RUNNER)
-             ========================================== -->
-        <div id="game-1-container" class="active">
-          <canvas id="jetpack-canvas"></canvas>
-          <div class="jetpack-instruction">
-            <i class="fa-solid fa-hand-pointer"></i> Klik Layar / Tekan Spasi untuk Terbang! Ambil Koin & Pisang!
+        <!-- GAME 1: MINION JETPACK FLYER (KEPT AS REQUESTED!) -->
+        <div id="game-layer-0" class="game-layer active">
+          <canvas id="jetpack-canvas" class="game-canvas-screen"></canvas>
+          <div class="game-instruction-pill">
+            <i class="fa-solid fa-hand-pointer"></i> Klik Layar / Spasi untuk Terbang! Hindari Laser & Ambil Pisang!
           </div>
         </div>
 
-        <!-- ==========================================
-             GAME 2: MINING DIGGER (GRID EXCAVATION)
-             ========================================== -->
-        <div id="game-2-container">
-          <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--amber-mining); margin-bottom: 4px; font-weight: 700;">
-            <i class="fa-solid fa-hammer"></i> GALI TANAH UNTUK MENEMUKAN KRISTAL NIKEL & LITHIUM!
-          </div>
-          <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">
-            Kedalaman Tambang: <span id="mine-depth" style="color: #FFF; font-weight: 800;">120 M</span>
-          </div>
-          <div class="mining-grid" id="mining-grid"></div>
-        </div>
-
-        <!-- ==========================================
-             GAME 3: QUANTUM MATRIX (SIMON MEMORY HACK)
-             ========================================== -->
-        <div id="game-3-container">
-          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--cyan-tech); font-weight: 700;">
-            <i class="fa-solid fa-brain"></i> HACKING MATRIX: INGAT URUTAN WARNA & KLIK KEMBALI!
-          </div>
-          <div id="matrix-status-text" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--yellow-soft); margin-top: 2px;">
-            Perhatikan urutan cahaya...
-          </div>
-          <div class="matrix-nodes-circle">
-            <button class="matrix-node-btn node-yellow" id="node-0" onclick="playerNodeClick(0)">
-              <i class="fa-solid fa-bolt"></i>
-            </button>
-            <button class="matrix-node-btn node-cyan" id="node-1" onclick="playerNodeClick(1)">
-              <i class="fa-solid fa-microchip"></i>
-            </button>
-            <button class="matrix-node-btn node-green" id="node-2" onclick="playerNodeClick(2)">
-              <i class="fa-solid fa-shield-halved"></i>
-            </button>
-            <button class="matrix-node-btn node-purple" id="node-3" onclick="playerNodeClick(3)">
-              <i class="fa-solid fa-atom"></i>
-            </button>
+        <!-- GAME 2: BANANA NINJA SLICER (FRUIT SLICE STYLE) -->
+        <div id="game-layer-1" class="game-layer">
+          <canvas id="slicer-canvas" class="game-canvas-screen"></canvas>
+          <div class="game-instruction-pill">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Geser/Sapukan Kursor untuk Menebas Pisang Emas & Kristal Nikel!
           </div>
         </div>
 
-        <!-- ==========================================
-             GAME 4: WHACK-A-MINION (ROUGE HACKER HUNT)
-             ========================================== -->
-        <div id="game-4-container">
-          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--emerald-tech); font-weight: 700;">
-            <i class="fa-solid fa-bullseye"></i> KETUK MINION NAKAL SEBELUM MEREKA MASUK KE LUBANG!
+        <!-- GAME 3: SPACE LASER BUG BLASTER -->
+        <div id="game-layer-2" class="game-layer">
+          <canvas id="blaster-canvas" class="game-canvas-screen"></canvas>
+          <div class="game-instruction-pill">
+            <i class="fa-solid fa-crosshairs"></i> Gerakkan Minion Kiri-Kanan untuk Menembak Jatuh Bug & Drone Siber!
           </div>
-          <div class="whack-holes-grid" id="whack-holes-grid">
-            <!-- 6 Holes -->
-            <div class="whack-hole" id="hole-0"><div class="whack-mole-target" id="mole-0" onclick="hitMole(0)"></div></div>
-            <div class="whack-hole" id="hole-1"><div class="whack-mole-target" id="mole-1" onclick="hitMole(1)"></div></div>
-            <div class="whack-hole" id="hole-2"><div class="whack-mole-target" id="mole-2" onclick="hitMole(2)"></div></div>
-            <div class="whack-hole" id="hole-3"><div class="whack-mole-target" id="mole-3" onclick="hitMole(3)"></div></div>
-            <div class="whack-hole" id="hole-4"><div class="whack-mole-target" id="mole-4" onclick="hitMole(4)"></div></div>
-            <div class="whack-hole" id="hole-5"><div class="whack-mole-target" id="mole-5" onclick="hitMole(5)"></div></div>
+        </div>
+
+        <!-- GAME 4: MINION BASKET CATCH FRENZY -->
+        <div id="game-layer-3" class="game-layer">
+          <canvas id="basket-canvas" class="game-canvas-screen"></canvas>
+          <div class="game-instruction-pill">
+            <i class="fa-solid fa-basket-shopping"></i> Geser Keranjang Minion untuk Menangkap Hujan Pisang & Berlian!
+          </div>
+        </div>
+
+        <!-- GAME 5: BOUNCY TRAMPOLINE JUGGLER -->
+        <div id="game-layer-4" class="game-layer">
+          <canvas id="trampoline-canvas" class="game-canvas-screen"></canvas>
+          <div class="game-instruction-pill">
+            <i class="fa-solid fa-volleyball"></i> Gerakkan Trampolin Kiri-Kanan agar Minion Terus Memantul Menabrak Koin!
+          </div>
+        </div>
+
+        <!-- GAME 6: UNLIMITED CASH RAIN & VAULT RUSH -->
+        <div id="game-layer-5" class="game-layer">
+          <canvas id="vault-canvas" class="game-canvas-screen"></canvas>
+          <div class="game-instruction-pill">
+            <i class="fa-solid fa-coins"></i> Klik & Sapu Uang Dollar & Emas yang Berjatuhan ke Dalam Brankas Unlimited!
           </div>
         </div>
 
@@ -1618,9 +1620,9 @@
 
       <!-- Stage Texts -->
       <h2 class="stage-title" id="stage-title">GAME 1: <span>MINION CYBER JETPACK</span></h2>
-      <div class="stage-desc" id="stage-desc">Terbangkan Minion melintasi terowongan lab kuantum! Ambil koin dan pisang emas!</div>
+      <div class="stage-desc" id="stage-desc">Terbangkan Minion melintasi terowongan lab! Ambil koin dan pisang emas!</div>
 
-      <!-- 30s Game progress bar -->
+      <!-- 20s Game progress bar -->
       <div class="per-game-progress-wrapper">
         <div class="per-game-progress-fill" id="per-game-progress-fill"></div>
       </div>
@@ -1655,8 +1657,8 @@
     </nav>
 
     <div class="header-actions">
-      <!-- Cyber SFX Toggle Button -->
-      <button class="sound-toggle-btn" id="sound-btn" title="Toggle Futuristic Cyber Audio">
+      <!-- Cyber Audio Toggle Button -->
+      <button class="sound-toggle-btn" id="sound-btn" title="Toggle Audio">
         <i class="fa-solid fa-volume-high" id="sound-icon"></i>
         <span>CYBER AUDIO</span>
       </button>
@@ -1710,7 +1712,7 @@
       <!-- Key Metrics: UNLIMITED & FINANCIAL FREEDOM -->
       <div class="hero-metrics">
         <div class="metric-item">
-          <div class="metric-value">UNLIMITED<span style="font-size: 1.2rem; color: #38BDF8;">/∞</span></div>
+          <div class="metric-value">UNLIMITED<span style="font-size: 1.2rem; color: #D97706;">/∞</span></div>
           <div class="metric-label">Penghasilan Tak Terhingga</div>
         </div>
         <div class="metric-item">
@@ -1731,7 +1733,7 @@
 
         <!-- Floating Badges -->
         <div class="float-badge float-badge-1">
-          <i class="fa-solid fa-crown" style="color: var(--amber-mining); font-size: 1.1rem;"></i>
+          <i class="fa-solid fa-crown" style="color: var(--amber-warm); font-size: 1.1rem;"></i>
           <div>
             <div style="font-weight: 700; color: #FFF;">Financial Freedom</div>
             <div style="color: var(--emerald-tech); font-size: 0.68rem;">Achieved Since 2022</div>
@@ -1814,7 +1816,7 @@
         </p>
         <div class="venture-stats">
           <span>Kapasitas Produksi</span>
-          <span class="vstat-val" style="color: var(--amber-mining);">5.4 Juta Ton / Tahun</span>
+          <span class="vstat-val" style="color: var(--amber-warm);">5.4 Juta Ton / Tahun</span>
         </div>
       </div>
 
@@ -1899,7 +1901,7 @@
   <!-- ========================================================================
        CYBER TERMINAL & MULTIDISCIPLINARY DOSSIER
        ======================================================================== -->
-  <section id="terminal" style="background: rgba(13, 19, 31, 0.45);">
+  <section id="terminal">
     <div class="section-header">
       <div class="section-badge">
         <i class="fa-solid fa-code"></i> CYBER LAB & DOSSIER
@@ -1953,7 +1955,7 @@
 
         <div class="terminal-body" id="terminal-body">
           <div class="term-line term-muted">===================================================</div>
-          <div class="term-line term-green">[✔] PROF. DR. PRISILLA DESTIANDA KERNEL v8.0 ONLINE</div>
+          <div class="term-line term-green">[✔] PROF. DR. PRISILLA DESTIANDA KERNEL v9.0 ONLINE</div>
           <div class="term-line term-green">[★] STATUS: FINANCIAL FREEDOM ACTIVE (SINCE 2022)</div>
           <div class="term-line term-muted">Ketik <code>help</code> untuk melihat opsi perintah rahasia.</div>
           <div class="term-line term-muted">===================================================</div>
@@ -2004,7 +2006,7 @@
 
       <div class="skill-card">
         <div class="skill-info">
-          <span class="skill-title"><i class="fa-solid fa-mountain" style="color: var(--amber-mining);"></i> Mineral Exploration & Mining Ops</span>
+          <span class="skill-title"><i class="fa-solid fa-mountain" style="color: var(--amber-warm);"></i> Mineral Exploration & Mining Ops</span>
           <span class="skill-percent">98%</span>
         </div>
         <div class="skill-bar"><div class="skill-fill" style="width: 98%; background: linear-gradient(90deg, #F59E0B, #FDE68A);"></div></div>
@@ -2031,7 +2033,7 @@
   <!-- ========================================================================
        REVENUE: UNLIMITED & FINANCIAL FREEDOM SINCE 2022
        ======================================================================== -->
-  <section id="revenue" style="background: rgba(13, 19, 31, 0.45);">
+  <section id="revenue">
     <div class="income-banner">
       <div class="income-grid">
         <div>
@@ -2054,7 +2056,7 @@
         <div class="revenue-stream-list">
           <div class="stream-box">
             <div class="stream-name">
-              <i class="fa-solid fa-mountain" style="color: var(--amber-mining);"></i>
+              <i class="fa-solid fa-mountain" style="color: var(--amber-warm);"></i>
               <span>Dividen Tambang Nikel & Mineral Baterai Dunia</span>
             </div>
             <div class="stream-amount">Arus Kas Abadi</div>
@@ -2153,7 +2155,7 @@
       <button class="bubble-close" id="bubble-close-btn">&times;</button>
     </div>
     <div class="bubble-content" id="bubble-message">
-      "Bello! Bu Prof. Dr. Prisilla sudah Financial Freedom sejak 2022! Coba mainkan 4 arcade game serunya, dan jangan ragu klik tombol 'Skip Game Ini' kalau mau ganti game!"
+      "Bello! Lihatlah background kuning soft dengan minion berterbangan dan kelap-kelip lembut! Setiap di-scroll ke bawah gradasinya berubah semakin hangat!"
     </div>
     <button class="bubble-action-btn" onclick="sayMinionQuote()">
       <i class="fa-solid fa-shuffle"></i> Laporan Asisten Minion
@@ -2171,11 +2173,81 @@
   </footer>
 
   <!-- ========================================================================
-       JAVASCRIPT: 4 ARCADE GAMES ENGINE, SKIP HANDLER, CLEAN AUDIO & CURSOR
+       JAVASCRIPT: BACKGROUND SCROLL GRADIENT, TWINKLE, & 6 ARCADE GAMES
        ======================================================================== -->
   <script>
     /* -------------------------------------------------------------------------
-       1. CLEAN FUTURISTIC CYBER AUDIO (TANPA PETIR / TANPA LEDAKAN BERISIK)
+       1. DYNAMIC BACKGROUND SCROLL GRADIENT & TWINKLE CANVAS
+       ------------------------------------------------------------------------- */
+    const scrollBg = document.getElementById('scroll-gradient-bg');
+    
+    // Gradasi warna kuning lembut yang berubah mulus saat di-scroll ke bawah
+    window.addEventListener('scroll', () => {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollFraction = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+
+      // Interpolasi nuansa warna kuning (dari cream lembut #FFFDF0 ke pastel #FEF08A, #FDE68A, hingga hangat #F59E0B)
+      const pct1 = Math.min(100, Math.floor(scrollFraction * 50));
+      const pct2 = Math.min(100, Math.floor(30 + scrollFraction * 40));
+      const pct3 = Math.min(100, Math.floor(60 + scrollFraction * 40));
+
+      scrollBg.style.background = `linear-gradient(180deg, 
+        #FFFDF0 0%, 
+        #FEF9C3 ${pct1}%, 
+        #FEF08A ${pct2}%, 
+        #FDE68A ${pct3}%, 
+        #FCD34D 90%, 
+        #F59E0B 100%)`;
+    });
+
+    // Twinkling Sparkles (Kelap-Kelip Halus di Latar Belakang)
+    const twinkleCanvas = document.getElementById('twinkle-canvas');
+    const twinkleCtx = twinkleCanvas.getContext('2d');
+    let stars = [];
+
+    function resizeTwinkleCanvas() {
+      twinkleCanvas.width = window.innerWidth;
+      twinkleCanvas.height = window.innerHeight;
+      initStars();
+    }
+
+    function initStars() {
+      stars = [];
+      const starCount = Math.floor(window.innerWidth / 28);
+      for (let i = 0; i < starCount; i++) {
+        stars.push({
+          x: Math.random() * twinkleCanvas.width,
+          y: Math.random() * twinkleCanvas.height,
+          radius: Math.random() * 2.2 + 0.8,
+          alpha: Math.random(),
+          speed: Math.random() * 0.025 + 0.008,
+          color: Math.random() > 0.4 ? '#FDE68A' : '#FFFFFF'
+        });
+      }
+    }
+
+    function renderTwinkles() {
+      twinkleCtx.clearRect(0, 0, twinkleCanvas.width, twinkleCanvas.height);
+      for (const s of stars) {
+        s.alpha += s.speed;
+        const currentAlpha = (Math.sin(s.alpha) + 1) / 2 * 0.65 + 0.15;
+
+        twinkleCtx.beginPath();
+        twinkleCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        twinkleCtx.fillStyle = s.color;
+        twinkleCtx.globalAlpha = currentAlpha;
+        twinkleCtx.fill();
+        twinkleCtx.globalAlpha = 1.0;
+      }
+      requestAnimationFrame(renderTwinkles);
+    }
+
+    window.addEventListener('resize', resizeTwinkleCanvas);
+    resizeTwinkleCanvas();
+    renderTwinkles();
+
+    /* -------------------------------------------------------------------------
+       2. CLEAN FUTURISTIC CYBER AUDIO & CURSOR RIPPLE
        ------------------------------------------------------------------------- */
     let audioEnabled = true;
     let audioCtx = null;
@@ -2190,7 +2262,6 @@
       return audioCtx;
     }
 
-    // Audio Klik: Crisp Cybernetic Holographic Click (Bersih, Berkelas)
     function playCyberClickAudio() {
       if (!audioEnabled) return;
       try {
@@ -2200,10 +2271,10 @@
         const gain = ctx.createGain();
 
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(820, t);
-        osc.frequency.exponentialRampToValueAtTime(350, t + 0.06);
+        osc.frequency.setValueAtTime(780, t);
+        osc.frequency.exponentialRampToValueAtTime(320, t + 0.06);
 
-        gain.gain.setValueAtTime(0.18, t);
+        gain.gain.setValueAtTime(0.16, t);
         gain.gain.exponentialRampToValueAtTime(0.001, t + 0.06);
 
         osc.connect(gain);
@@ -2213,7 +2284,6 @@
       } catch (e) {}
     }
 
-    // Audio Hover Kursor: Soft Frequency Sweep
     let lastMoveSfxTime = 0;
     function playCyberHoverAudio(freq = 640) {
       if (!audioEnabled) return;
@@ -2240,7 +2310,6 @@
       } catch (e) {}
     }
 
-    // Audio Point Pickup
     function playPointPickupSfx(tone = 880) {
       if (!audioEnabled) return;
       try {
@@ -2249,7 +2318,7 @@
         const gain = ctx.createGain();
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(tone, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(tone * 1.4, ctx.currentTime + 0.1);
+        osc.frequency.exponentialRampToValueAtTime(tone * 1.35, ctx.currentTime + 0.1);
         gain.gain.setValueAtTime(0.12, ctx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
         osc.connect(gain);
@@ -2259,7 +2328,6 @@
       } catch (e) {}
     }
 
-    // Toggle Sound Button
     const soundBtn = document.getElementById('sound-btn');
     const soundIcon = document.getElementById('sound-icon');
     soundBtn.addEventListener('click', (e) => {
@@ -2273,14 +2341,11 @@
       }
     });
 
-    /* -------------------------------------------------------------------------
-       2. EFEK KLIK KURSOR: CLEAN SOFT RIPPLE (PETIR TELAH DIHILANGKAN)
-       ------------------------------------------------------------------------- */
+    // Custom Minion Cursor & Soft Click Ripple (Tanpa Petir)
     window.addEventListener('click', (e) => {
       getAudioContext();
       playCyberClickAudio();
 
-      // Buat lingkaran ripple halus tanpa petir
       const rip = document.createElement('div');
       rip.className = 'cyber-click-ripple';
       rip.style.left = `${e.clientX}px`;
@@ -2289,7 +2354,6 @@
       setTimeout(() => rip.remove(), 400);
     });
 
-    // Custom Minion Cursor Tracker
     const minionCursor = document.getElementById('minion-cursor');
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
@@ -2367,7 +2431,7 @@
     }
 
     /* -------------------------------------------------------------------------
-       3. 4-GAME ARCADE ENGINE (30s MASING-MASING GAME + TOMBOL SKIP SINGLE GAME)
+       3. 6 ARCADE GAMES ENGINE (20s MASING-MASING GAME = 120s / 2 MENIT)
        ------------------------------------------------------------------------- */
     const introScreen = document.getElementById('intro-screen');
     const introGateScreen = document.getElementById('intro-gate-screen');
@@ -2383,49 +2447,61 @@
     const stageTitle = document.getElementById('stage-title');
     const stageDesc = document.getElementById('stage-desc');
 
-    const GAME_DURATION = 30.0; // 30 Detik per game
-    let currentGameIndex = 0; // 0, 1, 2, 3
+    const GAME_DURATION = 20.0; // Tepat 20 Detik per game
+    let currentGameIndex = 0; // 0 sampai 5
     let gameScore = 0;
     let gameStartTime = 0;
     let gameLoopActive = false;
 
-    // Games Metadata
+    // Daftar 6 Game
     const gameList = [
       {
         id: 0,
-        name: "GAME 1/4: MINION JETPACK",
+        name: "GAME 1/6: MINION JETPACK",
         title: "GAME 1: <span>MINION CYBER JETPACK</span>",
-        desc: "Klik Layar / Tekan Spasi untuk terbang! Hindari pilar laser dan ambil koin pisang emas!",
-        containerId: "game-1-container",
+        desc: "Klik Layar / Spasi untuk Terbang! Hindari laser dan raih pisang emas!",
         init: initGame1,
         cleanup: cleanupGame1
       },
       {
         id: 1,
-        name: "GAME 2/4: MINING DIGGER",
-        title: "GAME 2: <span>MINING DIGGER UNDERGROUND</span>",
-        desc: "Ketuk blok tanah untuk menggali deposit nikel, lithium, dan artefak tambang rahasia!",
-        containerId: "game-2-container",
+        name: "GAME 2/6: BANANA NINJA SLICER",
+        title: "GAME 2: <span>BANANA NINJA SLICER</span>",
+        desc: "Geser kursor untuk menebas pisang terbang dan kristal nikel menjadi dua!",
         init: initGame2,
         cleanup: cleanupGame2
       },
       {
         id: 2,
-        name: "GAME 3/4: QUANTUM MATRIX",
-        title: "GAME 3: <span>QUANTUM MEMORY MATRIX</span>",
-        desc: "Perhatikan urutan node cahaya kuantum, lalu tiru urutannya untuk memecahkan enkripsi!",
-        containerId: "game-3-container",
+        name: "GAME 3/6: SPACE BUG BLASTER",
+        title: "GAME 3: <span>SPACE BUG BLASTER</span>",
+        desc: "Gerakkan Minion ke kiri-kanan untuk menembak jatuh drone & bug siber!",
         init: initGame3,
         cleanup: cleanupGame3
       },
       {
         id: 3,
-        name: "GAME 4/4: WHACK-A-MINION",
-        title: "GAME 4: <span>WHACK-A-MINION ROGUE BOTS</span>",
-        desc: "Ketuk cepat Minion nakal dan bot hacker sebelum mereka bersembunyi kembali ke lubang!",
-        containerId: "game-4-container",
+        name: "GAME 4/6: BASKET CATCH FRENZY",
+        title: "GAME 4: <span>BASKET CATCH FRENZY</span>",
+        desc: "Tampung hujan pisang dan permata tambang ke dalam keranjang Minion!",
         init: initGame4,
         cleanup: cleanupGame4
+      },
+      {
+        id: 4,
+        name: "GAME 5/6: TRAMPOLINE JUGGLER",
+        title: "GAME 5: <span>BOUNCY TRAMPOLINE JUGGLER</span>",
+        desc: "Jaga agar Minion terus memantul di trampolin menabrak balon koin!",
+        init: initGame5,
+        cleanup: cleanupGame5
+      },
+      {
+        id: 5,
+        name: "GAME 6/6: UNLIMITED VAULT RUSH",
+        title: "GAME 6: <span>UNLIMITED VAULT RUSH</span>",
+        desc: "Sapu tumpukan uang dollar & emas yang berjatuhan ke dalam brankas kuantum!",
+        init: initGame6,
+        cleanup: cleanupGame6
       }
     ];
 
@@ -2455,7 +2531,6 @@
         return;
       }
 
-      // Cleanup game sebelumnya jika ada
       if (gameList[currentGameIndex] && gameList[currentGameIndex].cleanup) {
         gameList[currentGameIndex].cleanup();
       }
@@ -2463,22 +2538,20 @@
       currentGameIndex = index;
       const g = gameList[index];
 
-      // Sembunyikan semua container game & tampilkan yang aktif
       for (let i = 0; i < gameList.length; i++) {
-        const el = document.getElementById(gameList[i].containerId);
+        const el = document.getElementById(`game-layer-${i}`);
         if (el) el.classList.remove('active');
       }
-      const activeContainer = document.getElementById(g.containerId);
-      if (activeContainer) activeContainer.classList.add('active');
+      const activeLayer = document.getElementById(`game-layer-${index}`);
+      if (activeLayer) activeLayer.classList.add('active');
 
       currentGameBadge.innerHTML = `<i class="fa-solid fa-gamepad"></i> ${g.name}`;
       stageTitle.innerHTML = g.title;
       stageDesc.textContent = g.desc;
 
-      // Inisialisasi game aktif
       if (g.init) g.init();
 
-      // Mulai timer 30.0 detik untuk game ini
+      // Mulai timer 20.0 detik untuk game ini
       gameStartTime = performance.now();
       gameLoopActive = true;
 
@@ -2521,7 +2594,7 @@
 
       perGameTimerEl.textContent = "0.0s";
       perGameProgressFill.style.width = "0%";
-      stageTitle.innerHTML = "STATUS: <span>SEMUA GAME SELESAI!</span>";
+      stageTitle.innerHTML = "STATUS: <span>SEMUA 6 GAME SELESAI!</span>";
       stageDesc.textContent = `Selamat datang, Prof. Dr. Prisilla Destianda! Skor Akhir: ${gameScore} PTS!`;
 
       playPointPickupSfx(1100);
@@ -2532,7 +2605,7 @@
     }
 
     /* =========================================================================
-       IMPLEMENTASI GAME 1: MINION JETPACK FLYER (CANVAS RUNNER)
+       GAME 1: MINION CYBER JETPACK FLYER (KEPT AS REQUESTED)
        ========================================================================= */
     let jetpackAnimId = null;
     let jetpackCanvas, jetpackCtx;
@@ -2578,8 +2651,7 @@
     }
 
     function updateGame1(now) {
-      // Physics
-      minionPlayer.vy += 0.38; // gravity
+      minionPlayer.vy += 0.38;
       minionPlayer.y += minionPlayer.vy;
 
       if (minionPlayer.y < 5) { minionPlayer.y = 5; minionPlayer.vy = 0; }
@@ -2588,26 +2660,19 @@
         minionPlayer.vy = 0;
       }
 
-      // Spawner
-      if (now - jetpackLastSpawn > 1300) {
+      if (now - jetpackLastSpawn > 1200) {
         jetpackLastSpawn = now;
-        const gapH = 110;
+        const gapH = 115;
         const topH = Math.random() * (jetpackCanvas.height - gapH - 60) + 30;
-        // Obstacle lasers
-        jetpackObstacles.push({ x: jetpackCanvas.width + 10, topH: topH, botY: topH + gapH, w: 28, passed: false });
-        // Coins / Bananas inside gap
-        jetpackCoins.push({ x: jetpackCanvas.width + 30, y: topH + gapH / 2, r: 12, collected: false });
+        jetpackObstacles.push({ x: jetpackCanvas.width + 10, topH: topH, botY: topH + gapH, w: 28 });
+        jetpackCoins.push({ x: jetpackCanvas.width + 30, y: topH + gapH / 2, r: 12 });
       }
 
-      // Move & Collide Obstacles
       for (let i = jetpackObstacles.length - 1; i >= 0; i--) {
         const ob = jetpackObstacles[i];
-        ob.x -= 3.6;
-
-        // Check collision with top/bottom laser
+        ob.x -= 3.8;
         if (minionPlayer.x + minionPlayer.w > ob.x && minionPlayer.x < ob.x + ob.w) {
           if (minionPlayer.y < ob.topH || minionPlayer.y + minionPlayer.h > ob.botY) {
-            // Hit obstacle: bounce back slightly
             minionPlayer.vy = 4;
             ob.x -= 15;
           }
@@ -2615,10 +2680,9 @@
         if (ob.x < -40) jetpackObstacles.splice(i, 1);
       }
 
-      // Move & Collect Coins
       for (let i = jetpackCoins.length - 1; i >= 0; i--) {
         const c = jetpackCoins[i];
-        c.x -= 3.6;
+        c.x -= 3.8;
 
         const dist = Math.hypot((minionPlayer.x + minionPlayer.w/2) - c.x, (minionPlayer.y + minionPlayer.h/2) - c.y);
         if (dist < minionPlayer.w/2 + c.r) {
@@ -2638,7 +2702,6 @@
       const ctx = jetpackCtx;
       ctx.clearRect(0, 0, jetpackCanvas.width, jetpackCanvas.height);
 
-      // Draw Laser Gates
       ctx.fillStyle = '#EF4444';
       ctx.shadowColor = '#EF4444';
       ctx.shadowBlur = 10;
@@ -2648,7 +2711,6 @@
       }
       ctx.shadowBlur = 0;
 
-      // Draw Floating Bananas/Coins
       for (const c of jetpackCoins) {
         ctx.fillStyle = '#FDE68A';
         ctx.beginPath();
@@ -2658,20 +2720,16 @@
         ctx.fillText('🍌', c.x - 8, c.y + 5);
       }
 
-      // Draw Minion Player with Jetpack Flame
       const p = minionPlayer;
-      // Flame
       ctx.fillStyle = '#F59E0B';
       ctx.beginPath();
       ctx.arc(p.x - 4, p.y + p.h - 8, Math.random() * 6 + 4, 0, Math.PI*2);
       ctx.fill();
 
-      // Minion Body (Yellow & Denim)
       ctx.fillStyle = '#FDE68A';
       ctx.fillRect(p.x, p.y, p.w, p.h * 0.65);
       ctx.fillStyle = '#2563EB';
       ctx.fillRect(p.x, p.y + p.h * 0.65, p.w, p.h * 0.35);
-      // Goggle
       ctx.fillStyle = '#94A3B8';
       ctx.beginPath();
       ctx.arc(p.x + p.w/2, p.y + 12, 8, 0, Math.PI*2);
@@ -2684,206 +2742,622 @@
 
     function cleanupGame1() {
       if (jetpackAnimId) cancelAnimationFrame(jetpackAnimId);
-      if (jetpackCanvas) {
-        jetpackCanvas.onmousedown = null;
-      }
+      if (jetpackCanvas) jetpackCanvas.onmousedown = null;
       window.onkeydown = null;
     }
 
     /* =========================================================================
-       IMPLEMENTASI GAME 2: MINING DIGGER (GRID EXCAVATION)
+       GAME 2: BANANA NINJA SLICER (FRUIT SLICE STYLE)
        ========================================================================= */
-    const miningItems = ['💎', '⚡', '🍌', '⛏️', '🔷'];
-    let currentDepth = 120;
+    let slicerCanvas, slicerCtx, slicerAnimId;
+    let flyingFruits = [];
+    let sliceTrail = [];
+    let slicerLastSpawn = 0;
 
     function initGame2() {
-      const grid = document.getElementById('mining-grid');
-      grid.innerHTML = '';
-      currentDepth = 120;
-      document.getElementById('mine-depth').textContent = `${currentDepth} M`;
+      slicerCanvas = document.getElementById('slicer-canvas');
+      const arena = document.getElementById('arcade-arena');
+      slicerCanvas.width = arena.clientWidth || 800;
+      slicerCanvas.height = 310;
+      slicerCtx = slicerCanvas.getContext('2d');
 
-      // Generate 20 Blocks (5x4)
-      for (let i = 0; i < 20; i++) {
-        const b = document.createElement('div');
-        b.className = 'mine-block';
-        b.innerHTML = '<i class="fa-solid fa-cube"></i>';
-        b.dataset.revealed = "false";
-        b.dataset.reward = miningItems[Math.floor(Math.random() * miningItems.length)];
+      flyingFruits = [];
+      sliceTrail = [];
+      slicerLastSpawn = performance.now();
 
-        b.onclick = (e) => {
-          if (b.dataset.revealed === "true") return;
-          b.dataset.revealed = "true";
-          b.classList.add('revealed');
-          b.textContent = b.dataset.reward;
+      slicerCanvas.onmousemove = (e) => {
+        const rect = slicerCanvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        sliceTrail.push({ x: mx, y: my, time: performance.now() });
 
-          const pts = b.dataset.reward === '💎' ? 100 : (b.dataset.reward === '⚡' ? 80 : 50);
-          gameScore += pts;
-          gameTotalScoreEl.textContent = gameScore;
-          playPointPickupSfx(750);
-          spawnPointFlyout(e.clientX, e.clientY, `+${pts} PTS!`, "#38BDF8");
-
-          currentDepth += 35;
-          document.getElementById('mine-depth').textContent = `${currentDepth} M`;
-
-          // Cek jika hampir semua dibuka, refresh lapis baru
-          const unrevealed = grid.querySelectorAll('.mine-block[data-revealed="false"]');
-          if (unrevealed.length <= 4) {
-            setTimeout(initGame2, 300);
+        // Check fruit collision with swipe trail
+        for (let i = flyingFruits.length - 1; i >= 0; i--) {
+          const f = flyingFruits[i];
+          if (!f.sliced && Math.hypot(mx - f.x, my - f.y) < f.r + 15) {
+            f.sliced = true;
+            f.vx1 = -3; f.vx2 = 3; f.vy1 = -4; f.vy2 = -3;
+            gameScore += f.pts;
+            gameTotalScoreEl.textContent = gameScore;
+            playPointPickupSfx(1050);
+            spawnPointFlyout(e.clientX, e.clientY, `+${f.pts} SLICE! ⚔️`, "#FACC15");
           }
-        };
+        }
+      };
 
-        grid.appendChild(b);
+      function loop(now) {
+        updateGame2(now);
+        renderGame2(now);
+        if (currentGameIndex === 1 && gameLoopActive) {
+          slicerAnimId = requestAnimationFrame(loop);
+        }
+      }
+      slicerAnimId = requestAnimationFrame(loop);
+    }
+
+    function updateGame2(now) {
+      if (now - slicerLastSpawn > 750) {
+        slicerLastSpawn = now;
+        const types = [
+          { icon: '🍌', pts: 40, r: 18 },
+          { icon: '💎', pts: 60, r: 16 },
+          { icon: '⚡', pts: 50, r: 16 },
+          { icon: '⭐', pts: 100, r: 20 }
+        ];
+        const t = types[Math.floor(Math.random() * types.length)];
+        flyingFruits.push({
+          x: Math.random() * (slicerCanvas.width - 160) + 80,
+          y: slicerCanvas.height + 20,
+          vx: (Math.random() - 0.5) * 5,
+          vy: -(Math.random() * 4 + 9.5),
+          r: t.r,
+          icon: t.icon,
+          pts: t.pts,
+          sliced: false,
+          x1: 0, y1: 0, x2: 0, y2: 0, vx1: 0, vy1: 0, vx2: 0, vy2: 0
+        });
+      }
+
+      for (let i = flyingFruits.length - 1; i >= 0; i--) {
+        const f = flyingFruits[i];
+        if (!f.sliced) {
+          f.x += f.vx;
+          f.y += f.vy;
+          f.vy += 0.28; // gravity
+        } else {
+          f.x1 += f.vx1; f.y1 += f.vy1; f.vy1 += 0.35;
+          f.x2 += f.vx2; f.y2 += f.vy2; f.vy2 += 0.35;
+        }
+
+        if (f.y > slicerCanvas.height + 60 && f.vy > 0) {
+          flyingFruits.splice(i, 1);
+        }
+      }
+    }
+
+    function renderGame2(now) {
+      if (!slicerCtx) return;
+      const ctx = slicerCtx;
+      ctx.clearRect(0, 0, slicerCanvas.width, slicerCanvas.height);
+
+      // Render Sliced & Normal Fruits
+      ctx.font = '24px Arial';
+      for (const f of flyingFruits) {
+        if (!f.sliced) {
+          ctx.fillText(f.icon, f.x - 12, f.y + 8);
+        } else {
+          // Half 1
+          ctx.fillText(f.icon, f.x + f.x1 - 16, f.y + f.y1 + 8);
+          // Half 2
+          ctx.fillText(f.icon, f.x + f.x2 - 8, f.y + f.y2 + 8);
+        }
+      }
+
+      // Render Blade Swipe Trail
+      sliceTrail = sliceTrail.filter(p => now - p.time < 180);
+      if (sliceTrail.length > 1) {
+        ctx.strokeStyle = '#FDE68A';
+        ctx.shadowColor = '#FACC15';
+        ctx.shadowBlur = 12;
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(sliceTrail[0].x, sliceTrail[0].y);
+        for (let i = 1; i < sliceTrail.length; i++) {
+          ctx.lineTo(sliceTrail[i].x, sliceTrail[i].y);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
       }
     }
 
     function cleanupGame2() {
-      const grid = document.getElementById('mining-grid');
-      if (grid) grid.innerHTML = '';
+      if (slicerAnimId) cancelAnimationFrame(slicerAnimId);
+      if (slicerCanvas) slicerCanvas.onmousemove = null;
     }
 
     /* =========================================================================
-       IMPLEMENTASI GAME 3: QUANTUM MATRIX (SIMON SAYS MEMORY HACK)
+       GAME 3: SPACE LASER BUG BLASTER
        ========================================================================= */
-    let matrixSequence = [];
-    let playerStep = 0;
-    let isMatrixAcceptingInput = false;
+    let blasterCanvas, blasterCtx, blasterAnimId;
+    let blasterShipX = 350;
+    let blasterLasers = [];
+    let blasterBugs = [];
+    let blasterLastSpawn = 0;
+    let blasterLastShoot = 0;
 
     function initGame3() {
-      matrixSequence = [];
-      playerStep = 0;
-      isMatrixAcceptingInput = false;
-      startNextMatrixRound(3); // Mulai dengan urutan 3 warna
+      blasterCanvas = document.getElementById('blaster-canvas');
+      const arena = document.getElementById('arcade-arena');
+      blasterCanvas.width = arena.clientWidth || 800;
+      blasterCanvas.height = 310;
+      blasterCtx = blasterCanvas.getContext('2d');
+
+      blasterShipX = blasterCanvas.width / 2;
+      blasterLasers = [];
+      blasterBugs = [];
+      blasterLastSpawn = performance.now();
+      blasterLastShoot = performance.now();
+
+      blasterCanvas.onmousemove = (e) => {
+        const rect = blasterCanvas.getBoundingClientRect();
+        blasterShipX = Math.max(30, Math.min(blasterCanvas.width - 30, e.clientX - rect.left));
+      };
+
+      function loop(now) {
+        updateGame3(now);
+        renderGame3();
+        if (currentGameIndex === 2 && gameLoopActive) {
+          blasterAnimId = requestAnimationFrame(loop);
+        }
+      }
+      blasterAnimId = requestAnimationFrame(loop);
     }
 
-    function startNextMatrixRound(length) {
-      if (currentGameIndex !== 2) return;
-      isMatrixAcceptingInput = false;
-      document.getElementById('matrix-status-text').textContent = "Perhatikan urutan node cahaya kuantum...";
-
-      matrixSequence = [];
-      for (let i = 0; i < length; i++) {
-        matrixSequence.push(Math.floor(Math.random() * 4));
+    function updateGame3(now) {
+      // Auto shoot laser pulses
+      if (now - blasterLastShoot > 220) {
+        blasterLastShoot = now;
+        blasterLasers.push({ x: blasterShipX, y: blasterCanvas.height - 40, vy: -9 });
+        playPointPickupSfx(480);
       }
 
-      playerStep = 0;
-      let playIdx = 0;
-      const flashInterval = setInterval(() => {
-        if (currentGameIndex !== 2) {
-          clearInterval(flashInterval);
-          return;
-        }
-        flashNode(matrixSequence[playIdx]);
-        playIdx++;
-        if (playIdx >= matrixSequence.length) {
-          clearInterval(flashInterval);
-          setTimeout(() => {
-            isMatrixAcceptingInput = true;
-            document.getElementById('matrix-status-text').textContent = "Giliran Anda! Klik node dengan urutan yang sama!";
-          }, 400);
-        }
-      }, 600);
-    }
-
-    function flashNode(id) {
-      const btn = document.getElementById(`node-${id}`);
-      if (!btn) return;
-      btn.classList.add('flashing');
-      playPointPickupSfx(440 + id * 140);
-      setTimeout(() => btn.classList.remove('flashing'), 320);
-    }
-
-    function playerNodeClick(id) {
-      if (!isMatrixAcceptingInput || currentGameIndex !== 2) return;
-      flashNode(id);
-
-      if (id === matrixSequence[playerStep]) {
-        playerStep++;
-        if (playerStep >= matrixSequence.length) {
-          // Babak berhasil!
-          isMatrixAcceptingInput = false;
-          gameScore += 150;
-          gameTotalScoreEl.textContent = gameScore;
-          document.getElementById('matrix-status-text').textContent = "HACK SUKSES! +150 PTS! Memuat urutan berikutnya...";
-          spawnPointFlyout(window.innerWidth / 2, window.innerHeight / 2 - 40, "+150 PTS HACK!", "#34D399");
-          setTimeout(() => startNextMatrixRound(matrixSequence.length + 1), 1000);
-        }
-      } else {
-        // Salah
-        document.getElementById('matrix-status-text').textContent = "Urutan salah! Mengulang urutan...";
-        isMatrixAcceptingInput = false;
-        setTimeout(() => startNextMatrixRound(matrixSequence.length), 1000);
+      // Move lasers
+      for (let i = blasterLasers.length - 1; i >= 0; i--) {
+        blasterLasers[i].y += blasterLasers[i].vy;
+        if (blasterLasers[i].y < -10) blasterLasers.splice(i, 1);
       }
+
+      // Spawn bugs
+      if (now - blasterLastSpawn > 650) {
+        blasterLastSpawn = now;
+        blasterBugs.push({
+          x: Math.random() * (blasterCanvas.width - 60) + 30,
+          y: -20,
+          vy: Math.random() * 1.5 + 1.8,
+          icon: Math.random() > 0.5 ? '👾' : '🤖',
+          r: 16
+        });
+      }
+
+      // Move bugs and check collision with lasers
+      for (let b = blasterBugs.length - 1; b >= 0; b--) {
+        const bug = blasterBugs[b];
+        bug.y += bug.vy;
+
+        for (let l = blasterLasers.length - 1; l >= 0; l--) {
+          const laser = blasterLasers[l];
+          if (Math.hypot(laser.x - bug.x, laser.y - bug.y) < bug.r + 6) {
+            blasterBugs.splice(b, 1);
+            blasterLasers.splice(l, 1);
+            gameScore += 40;
+            gameTotalScoreEl.textContent = gameScore;
+            playPointPickupSfx(950);
+            spawnPointFlyout(bug.x + 80, bug.y + 120, "+40 BLAST! 💥", "#38BDF8");
+            break;
+          }
+        }
+
+        if (bug.y > blasterCanvas.height + 20) blasterBugs.splice(b, 1);
+      }
+    }
+
+    function renderGame3() {
+      if (!blasterCtx) return;
+      const ctx = blasterCtx;
+      ctx.clearRect(0, 0, blasterCanvas.width, blasterCanvas.height);
+
+      // Draw Lasers
+      ctx.fillStyle = '#38BDF8';
+      ctx.shadowColor = '#38BDF8';
+      ctx.shadowBlur = 8;
+      for (const l of blasterLasers) {
+        ctx.fillRect(l.x - 2, l.y, 4, 12);
+      }
+      ctx.shadowBlur = 0;
+
+      // Draw Bugs
+      ctx.font = '22px Arial';
+      for (const b of blasterBugs) {
+        ctx.fillText(b.icon, b.x - 11, b.y + 8);
+      }
+
+      // Draw Minion Space Cannon
+      const sx = blasterShipX;
+      const sy = blasterCanvas.height - 25;
+      ctx.fillStyle = '#2563EB';
+      ctx.beginPath();
+      ctx.ellipse(sx, sy, 25, 12, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#FDE68A';
+      ctx.beginPath();
+      ctx.arc(sx, sy - 8, 14, Math.PI, 0);
+      ctx.fill();
+      ctx.fillStyle = '#94A3B8';
+      ctx.fillRect(sx - 2, sy - 22, 4, 10);
     }
 
     function cleanupGame3() {
-      isMatrixAcceptingInput = false;
+      if (blasterAnimId) cancelAnimationFrame(blasterAnimId);
+      if (blasterCanvas) blasterCanvas.onmousemove = null;
     }
 
     /* =========================================================================
-       IMPLEMENTASI GAME 4: WHACK-A-MINION (ROUGE HACKER HUNT)
+       GAME 4: MINION BASKET CATCH FRENZY
        ========================================================================= */
-    let moleInterval = null;
-    let activeMoleIndex = -1;
+    let basketCanvas, basketCtx, basketAnimId;
+    let basketX = 350;
+    let fallingCatchItems = [];
+    let basketLastSpawn = 0;
 
     function initGame4() {
-      // Setup Mole Targets SVGs
-      for (let i = 0; i < 6; i++) {
-        const m = document.getElementById(`mole-${i}`);
-        m.innerHTML = `
-          <svg viewBox="0 0 100 110" width="100%" height="100%">
-            <rect x="25" y="15" width="50" height="75" rx="25" fill="#FDE68A" />
-            <path d="M25 65 C25 65 32 75 50 75 C68 75 75 65 75 65 L75 90 L25 90 Z" fill="#2563EB" />
-            <rect x="23" y="32" width="54" height="6" fill="#1E293B" />
-            <circle cx="50" cy="35" r="14" fill="#94A3B8" />
-            <circle cx="50" cy="35" r="10" fill="#FFFFFF" />
-            <circle cx="50" cy="35" r="5" fill="#38BDF8" />
-            <path d="M42 52 Q50 60 58 52" stroke="#1E293B" stroke-width="2.5" fill="none" />
-          </svg>
-        `;
-      }
+      basketCanvas = document.getElementById('basket-canvas');
+      const arena = document.getElementById('arcade-arena');
+      basketCanvas.width = arena.clientWidth || 800;
+      basketCanvas.height = 310;
+      basketCtx = basketCanvas.getContext('2d');
 
-      moleInterval = setInterval(popUpRandomMole, 850);
+      basketX = basketCanvas.width / 2;
+      fallingCatchItems = [];
+      basketLastSpawn = performance.now();
+
+      basketCanvas.onmousemove = (e) => {
+        const rect = basketCanvas.getBoundingClientRect();
+        basketX = Math.max(40, Math.min(basketCanvas.width - 40, e.clientX - rect.left));
+      };
+
+      function loop(now) {
+        updateGame4(now);
+        renderGame4();
+        if (currentGameIndex === 3 && gameLoopActive) {
+          basketAnimId = requestAnimationFrame(loop);
+        }
+      }
+      basketAnimId = requestAnimationFrame(loop);
     }
 
-    function popUpRandomMole() {
-      if (currentGameIndex !== 3) return;
-
-      // Turunkan mole aktif sebelumnya
-      if (activeMoleIndex !== -1) {
-        const prev = document.getElementById(`mole-${activeMoleIndex}`);
-        if (prev) prev.classList.remove('up');
+    function updateGame4(now) {
+      if (now - basketLastSpawn > 580) {
+        basketLastSpawn = now;
+        const types = [
+          { icon: '🍌', pts: 30 },
+          { icon: '💎', pts: 50 },
+          { icon: '⚡', pts: 40 },
+          { icon: '👑', pts: 80 }
+        ];
+        const t = types[Math.floor(Math.random() * types.length)];
+        fallingCatchItems.push({
+          x: Math.random() * (basketCanvas.width - 80) + 40,
+          y: -20,
+          vy: Math.random() * 2 + 3.2,
+          icon: t.icon,
+          pts: t.pts
+        });
       }
 
-      activeMoleIndex = Math.floor(Math.random() * 6);
-      const next = document.getElementById(`mole-${activeMoleIndex}`);
-      if (next) {
-        next.classList.add('up');
-        playPointPickupSfx(420);
+      for (let i = fallingCatchItems.length - 1; i >= 0; i--) {
+        const it = fallingCatchItems[i];
+        it.y += it.vy;
+
+        // Catch with basket
+        if (it.y > basketCanvas.height - 45 && it.y < basketCanvas.height - 15) {
+          if (Math.abs(it.x - basketX) < 42) {
+            gameScore += it.pts;
+            gameTotalScoreEl.textContent = gameScore;
+            playPointPickupSfx(900);
+            spawnPointFlyout(basketX + 80, basketCanvas.height - 60, `+${it.pts} CATCH! 🧺`, "#34D399");
+            fallingCatchItems.splice(i, 1);
+            continue;
+          }
+        }
+
+        if (it.y > basketCanvas.height + 25) fallingCatchItems.splice(i, 1);
       }
     }
 
-    function hitMole(id) {
-      if (id !== activeMoleIndex || currentGameIndex !== 3) return;
-      const m = document.getElementById(`mole-${id}`);
-      if (!m.classList.contains('up')) return;
+    function renderGame4() {
+      if (!basketCtx) return;
+      const ctx = basketCtx;
+      ctx.clearRect(0, 0, basketCanvas.width, basketCanvas.height);
 
-      m.classList.remove('up');
-      activeMoleIndex = -1;
+      // Draw Falling items
+      ctx.font = '24px Arial';
+      for (const it of fallingCatchItems) {
+        ctx.fillText(it.icon, it.x - 12, it.y);
+      }
 
-      gameScore += 80;
-      gameTotalScoreEl.textContent = gameScore;
-      playPointPickupSfx(980);
+      // Draw Minion with Basket
+      const bx = basketX;
+      const by = basketCanvas.height - 20;
 
-      const rect = m.getBoundingClientRect();
-      spawnPointFlyout(rect.left + 20, rect.top - 10, "+80 PTS!", "#FACC15");
+      // Basket
+      ctx.fillStyle = '#D97706';
+      ctx.beginPath();
+      ctx.arc(bx, by - 12, 38, 0, Math.PI);
+      ctx.fill();
+
+      // Minion Body Under Basket
+      ctx.fillStyle = '#FDE68A';
+      ctx.fillRect(bx - 14, by - 10, 28, 20);
+      ctx.fillStyle = '#2563EB';
+      ctx.fillRect(bx - 14, by, 28, 10);
     }
 
     function cleanupGame4() {
-      if (moleInterval) clearInterval(moleInterval);
-      for (let i = 0; i < 6; i++) {
-        const m = document.getElementById(`mole-${i}`);
-        if (m) m.classList.remove('up');
+      if (basketAnimId) cancelAnimationFrame(basketAnimId);
+      if (basketCanvas) basketCanvas.onmousemove = null;
+    }
+
+    /* =========================================================================
+       GAME 5: BOUNCY TRAMPOLINE JUGGLER
+       ========================================================================= */
+    let trampCanvas, trampCtx, trampAnimId;
+    let trampPadX = 350;
+    let jugglerMinion = { x: 350, y: 100, vx: 3.5, vy: 0, r: 18 };
+    let trampClouds = [];
+
+    function initGame5() {
+      trampCanvas = document.getElementById('trampoline-canvas');
+      const arena = document.getElementById('arcade-arena');
+      trampCanvas.width = arena.clientWidth || 800;
+      trampCanvas.height = 310;
+      trampCtx = trampCanvas.getContext('2d');
+
+      trampPadX = trampCanvas.width / 2;
+      jugglerMinion = { x: trampPadX, y: 80, vx: 3.2, vy: 0, r: 18 };
+
+      // Generate cloud targets
+      trampClouds = [];
+      for (let r = 0; r < 2; r++) {
+        for (let c = 0; c < 6; c++) {
+          trampClouds.push({
+            x: c * (trampCanvas.width / 6) + 30,
+            y: r * 45 + 35,
+            w: 55,
+            h: 22,
+            icon: '⭐',
+            hit: false
+          });
+        }
       }
+
+      trampCanvas.onmousemove = (e) => {
+        const rect = trampCanvas.getBoundingClientRect();
+        trampPadX = Math.max(50, Math.min(trampCanvas.width - 50, e.clientX - rect.left));
+      };
+
+      function loop() {
+        updateGame5();
+        renderGame5();
+        if (currentGameIndex === 4 && gameLoopActive) {
+          trampAnimId = requestAnimationFrame(loop);
+        }
+      }
+      trampAnimId = requestAnimationFrame(loop);
+    }
+
+    function updateGame5() {
+      const m = jugglerMinion;
+      m.vy += 0.28; // gravity
+      m.x += m.vx;
+      m.y += m.vy;
+
+      // Wall bounce
+      if (m.x < m.r || m.x > trampCanvas.width - m.r) m.vx *= -1;
+      if (m.y < m.r) { m.y = m.r; m.vy *= -1; }
+
+      // Trampoline bounce
+      const padY = trampCanvas.height - 25;
+      const padW = 100;
+      if (m.y + m.r > padY && m.y - m.r < padY + 12) {
+        if (m.x > trampPadX - padW/2 && m.x < trampPadX + padW/2) {
+          m.vy = -8.8;
+          // Angled bounce based on where it hit pad
+          m.vx = ((m.x - trampPadX) / (padW/2)) * 5.5;
+          playPointPickupSfx(620);
+        }
+      }
+
+      // Hit cloud coin targets
+      for (const cl of trampClouds) {
+        if (!cl.hit && m.x > cl.x && m.x < cl.x + cl.w && m.y > cl.y && m.y < cl.y + cl.h) {
+          cl.hit = true;
+          m.vy *= -1;
+          gameScore += 50;
+          gameTotalScoreEl.textContent = gameScore;
+          playPointPickupSfx(1050);
+          spawnPointFlyout(cl.x + 80, cl.y + 120, "+50 BOUNCE! ⭐", "#FDE68A");
+        }
+      }
+
+      // Bottom fall reset
+      if (m.y > trampCanvas.height + 20) {
+        m.x = trampPadX;
+        m.y = 80;
+        m.vy = 0;
+        m.vx = (Math.random() - 0.5) * 6;
+      }
+    }
+
+    function renderGame5() {
+      if (!trampCtx) return;
+      const ctx = trampCtx;
+      ctx.clearRect(0, 0, trampCanvas.width, trampCanvas.height);
+
+      // Draw clouds / targets
+      for (const cl of trampClouds) {
+        if (!cl.hit) {
+          ctx.fillStyle = 'rgba(253, 230, 138, 0.25)';
+          ctx.strokeStyle = '#FACC15';
+          ctx.beginPath();
+          ctx.roundRect(cl.x, cl.y, cl.w, cl.h, 8);
+          ctx.fill();
+          ctx.stroke();
+          ctx.font = '14px Arial';
+          ctx.fillText(cl.icon, cl.x + 18, cl.y + 16);
+        }
+      }
+
+      // Draw Bouncing Minion
+      const m = jugglerMinion;
+      ctx.fillStyle = '#FDE68A';
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#2563EB';
+      ctx.beginPath();
+      ctx.arc(m.x, m.y + 7, m.r * 0.7, 0, Math.PI);
+      ctx.fill();
+      ctx.fillStyle = '#94A3B8';
+      ctx.beginPath();
+      ctx.arc(m.x, m.y - 4, 6, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Draw Trampoline Pad
+      const px = trampPadX;
+      const py = trampCanvas.height - 25;
+      ctx.fillStyle = '#38BDF8';
+      ctx.shadowColor = '#38BDF8';
+      ctx.shadowBlur = 10;
+      ctx.beginPath();
+      ctx.roundRect(px - 50, py, 100, 10, 5);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    function cleanupGame5() {
+      if (trampAnimId) cancelAnimationFrame(trampAnimId);
+      if (trampCanvas) trampCanvas.onmousemove = null;
+    }
+
+    /* =========================================================================
+       GAME 6: UNLIMITED CASH RAIN & VAULT RUSH
+       ========================================================================= */
+    let vaultCanvas, vaultCtx, vaultAnimId;
+    let rainItems = [];
+    let vaultLastSpawn = 0;
+    let vaultEnergy = 0;
+
+    function initGame6() {
+      vaultCanvas = document.getElementById('vault-canvas');
+      const arena = document.getElementById('arcade-arena');
+      vaultCanvas.width = arena.clientWidth || 800;
+      vaultCanvas.height = 310;
+      vaultCtx = vaultCanvas.getContext('2d');
+
+      rainItems = [];
+      vaultEnergy = 0;
+      vaultLastSpawn = performance.now();
+
+      vaultCanvas.onmousemove = (e) => {
+        const rect = vaultCanvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+
+        // Sweep/collect money
+        for (let i = rainItems.length - 1; i >= 0; i--) {
+          const r = rainItems[i];
+          if (Math.hypot(mx - r.x, my - r.y) < r.radius + 20) {
+            gameScore += r.pts;
+            vaultEnergy = Math.min(100, vaultEnergy + 3);
+            gameTotalScoreEl.textContent = gameScore;
+            playPointPickupSfx(1100);
+            spawnPointFlyout(e.clientX, e.clientY, `+${r.pts} 💰`, "#10B981");
+            rainItems.splice(i, 1);
+          }
+        }
+      };
+
+      function loop(now) {
+        updateGame6(now);
+        renderGame6();
+        if (currentGameIndex === 5 && gameLoopActive) {
+          vaultAnimId = requestAnimationFrame(loop);
+        }
+      }
+      vaultAnimId = requestAnimationFrame(loop);
+    }
+
+    function updateGame6(now) {
+      if (now - vaultLastSpawn > 250) {
+        vaultLastSpawn = now;
+        const types = [
+          { icon: '💵', pts: 50 },
+          { icon: '💰', pts: 100 },
+          { icon: '🪙', pts: 80 },
+          { icon: '💎', pts: 120 }
+        ];
+        const t = types[Math.floor(Math.random() * types.length)];
+        rainItems.push({
+          x: Math.random() * (vaultCanvas.width - 80) + 40,
+          y: -20,
+          vy: Math.random() * 3 + 4,
+          icon: t.icon,
+          pts: t.pts,
+          radius: 18
+        });
+      }
+
+      for (let i = rainItems.length - 1; i >= 0; i--) {
+        rainItems[i].y += rainItems[i].vy;
+        if (rainItems[i].y > vaultCanvas.height + 30) rainItems.splice(i, 1);
+      }
+    }
+
+    function renderGame6() {
+      if (!vaultCtx) return;
+      const ctx = vaultCtx;
+      ctx.clearRect(0, 0, vaultCanvas.width, vaultCanvas.height);
+
+      // Draw Falling Cash/Coins
+      ctx.font = '26px Arial';
+      for (const it of rainItems) {
+        ctx.fillText(it.icon, it.x - 13, it.y);
+      }
+
+      // Draw Central Vault Reactor
+      const cx = vaultCanvas.width / 2;
+      const cy = vaultCanvas.height / 2 + 10;
+      ctx.fillStyle = '#1E293B';
+      ctx.strokeStyle = '#FDE68A';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 55, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.font = '28px Arial';
+      ctx.fillText('🏦', cx - 18, cy + 10);
+
+      // Energy meter
+      ctx.fillStyle = '#10B981';
+      ctx.font = 'bold 13px JetBrains Mono';
+      ctx.fillText(`VAULT: ${vaultEnergy}% CHARGED`, cx - 70, cy + 85);
+    }
+
+    function cleanupGame6() {
+      if (vaultAnimId) cancelAnimationFrame(vaultAnimId);
+      if (vaultCanvas) vaultCanvas.onmousemove = null;
     }
 
     /* -------------------------------------------------------------------------
@@ -2917,10 +3391,10 @@
         case 'help':
           respRow.innerHTML = `
             >> DAFTAR PERINTAH LAB:<br>
-            - <span class="term-prompt">freedom</span>: Status & rekor Financial Freedom sejak 2022.<br>
-            - <span class="term-prompt">degrees</span>: Gelar akademik resmi & multidisiplin Prof. Prisilla.<br>
-            - <span class="term-prompt">mining</span>: Data 6 konsesi tambang nikel & mineral tanah jarang.<br>
-            - <span class="term-prompt">revenue</span>: Detail penghasilan Unlimited (Tak Terhingga).<br>
+            - <span class="term-prompt">freedom</span>: Status Financial Freedom sejak 2022.<br>
+            - <span class="term-prompt">degrees</span>: Gelar akademik resmi Prof. Prisilla.<br>
+            - <span class="term-prompt">mining</span>: Data 6 konsesi tambang nikel & lithium.<br>
+            - <span class="term-prompt">revenue</span>: Detail arus kas Unlimited (Tak Terhingga).<br>
             - <span class="term-prompt">hack</span>: Uji penetrasi sistem kuantum.<br>
             - <span class="term-prompt">clear</span>: Bersihkan layar terminal.
           `;
@@ -2947,9 +3421,9 @@
 
         case 'mining':
           respRow.innerHTML = `
-            <span style="color: var(--amber-mining);">> KORPORASI TAMBANG:</span> Destianda Mega Mineral Resources Corp.<br>
-            <span style="color: var(--amber-mining);">> KOMODITAS:</span> Nikel Baterai Kelas 1, Lithium Kuantum, Rare-Earth Elements.<br>
-            <span style="color: var(--amber-mining);">> KAPASITAS:</span> 5.4 Juta Metrik Ton/Tahun di 6 Konsesi Tambang Berkelanjutan.
+            <span style="color: var(--amber-warm);">> KORPORASI TAMBANG:</span> Destianda Mega Mineral Resources Corp.<br>
+            <span style="color: var(--amber-warm);">> KOMODITAS:</span> Nikel Baterai Kelas 1, Lithium Kuantum, Rare-Earth Elements.<br>
+            <span style="color: var(--amber-warm);">> KAPASITAS:</span> 5.4 Juta Metrik Ton/Tahun di 6 Konsesi Tambang Berkelanjutan.
           `;
           break;
 
